@@ -1,0 +1,158 @@
+.quarto-title-block .quarto-title-banner {
+  background-size: 240px;
+  background-position: right;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  color:  #002B5C;
+  text-align: center
+}
+
+#title-block-header {
+  margin-block-end: 0rem;
+  
+}
+
+/* styles.css */
+.room {
+    position: relative; /* Necesario para que el título absoluto se posicione relativo a este contenedor */
+      text-align: center;
+
+}
+
+#id_sub {
+    position: absolute; /* Posicionamiento absoluto */
+    top: 39px; /* Ajusta este valor para mover el título hacia arriba o abajo */
+    left: 50%; /* Posiciona el título en el centro horizontalmente */
+    transform: translateX(-50%); /* Centra el título horizontalmente */
+    padding: 5px; /* Espaciado alrededor del texto */
+    font-size: 15px; /* Tamaño de la fuente */
+}
+
+#id_sub1 {
+    position: absolute; /* Posicionamiento absoluto */
+    top: -40px; /* Ajusta este valor para mover el título hacia arriba o abajo */
+    left: 50%; /* Posiciona el título en el centro horizontalmente */
+    transform: translateX(-50%); /* Centra el título horizontalmente */
+    padding: 5px; /* Espaciado alrededor del texto */
+}
+ #id_plazo_promedio {
+    background-color: white !important;
+    border: 1px solid #002B5C  !important;
+    color: #002B5C !important;
+    font-size: 0.5px !important;
+    max-height: 110px;
+  }
+  
+   #id_values_1 {
+    background-color:  #002B5C;
+    border: 1px solid #002B5C;
+    color: white;
+    font-size: 0.5px;
+    max-height: 110px;
+  }
+  
+  
+     #id_values_2 {
+    background-color:  #145414 ;
+    border: 1px solid #145414;
+    color: white;
+    font-size: 0.5px;
+    max-height: 110px;
+  }
+  
+  
+  
+/* Estilo personalizado para los value_box con altura constante */
+.card  {
+  background-color: white;       /* Fondo blanco */
+  border: 1px solid #002B5C;     /* Borde azul */
+  border-radius: 10px;           /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  display: flex;                 /* Flexbox para centrar el contenido verticalmente */
+  justify-content: center;       /* Centrar contenido verticalmente */
+}
+
+
+.subtitle {
+ color: #002B5C;
+ text-align: center;
+ font-size: 11px;
+
+}
+
+.body1{
+ text-align: center;
+ color: black;
+}
+
+.body2{
+  text-align: justify;
+  line-height: 1.5;
+  color: black;
+  font-size: 11px !important;
+  
+}
+
+
+.Reactable * {
+    font-size: 13px;
+    padding: 1px;
+}
+
+.rt-page-info{
+    font-size: 13px;
+}
+
+.color_boton_descargar{
+  background: #fff;
+  color: #002B5C;
+
+  
+}
+
+.color_boton_descargar:hover{
+  background: #002B5C;
+  color: #fff;
+  
+  
+}
+
+.value_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #003366; /* Color de fondo del contenedor */
+    padding: 10px;
+    border-radius: 10px;
+    color: white; /* Color del texto */
+}
+
+.value_box .icon {
+    flex-shrink: 0; /* Asegura que el icono no se reduzca */
+    margin-right: 10px;
+}
+
+.value_box .icon img {
+    width: 40px; /* Ajusta el tamaño del icono según sea necesario */
+}
+
+.value_box .text {
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.value_box .text p {
+    margin: 0;
+}
+
+
+.value-box-title{
+    font-size: 13px !important;
+}
+
+.value-box-value{
+    font-size: 13px !important;
+}
+
+.icon-large {
+  height: 0.4em  !important;/* Cambia el tamaño del icono */
+}

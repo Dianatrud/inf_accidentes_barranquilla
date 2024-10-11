@@ -1,0 +1,159 @@
+---
+title: ""
+title-block-banner: "#fff"
+format:
+  html:
+       highlight-style: printing 
+       theme: cosmo
+engine: knitr
+
+
+---
+
+```{r , include=FALSE}
+
+#Librerias
+library(RSocrata)
+library(tidyverse)
+library(echarts4r)
+library(lubridate)
+library(reactable)
+library(gt)
+library(bsicons)
+library(bslib)
+library(leaflet)
+library(htmltools)
+library(scales)
+
+#Funciones
+na_repl_0 <- function(x) {
+  if_else(condition = is.na(x), 
+          true = 0, 
+          false = (x))
+}
+
+#Conexion a la api
+data_maestra <- read.socrata("https://www.datos.gov.co/resource/yb9r-2dsi.json") 
+
+```
+
+```{r , include=FALSE}
+
+
+
+data_maestra <- data_maestra %>% 
+  filter(a_o_accidente > 2022)
+
+
+#cantidad accidentes totales
+accidentes_totales <- data_maestra %>% 
+  summarise(cantidad = n())
+
+
+#cantidad accidentes totales con muertos
+accidentes_muertos <- data_maestra %>% 
+  filter(gravedad_accidente == "Con muertos") %>% 
+  summarise(cantidad = n())
+
+
+data_agrupada <- data_maestra %>% 
+  group_by(a_o_accidente) %>% 
+  mutate(across(c("cant_heridos_en_sitio_accidente", "cantidad_accidentes", "cant_muertos_en_sitio_accidente"), as.integer),
+         across(c("cant_heridos_en_sitio_accidente", "cantidad_accidentes", "cant_muertos_en_sitio_accidente"), na_repl_0)) %>% 
+  summarise(cantidad_accidentes = n(),
+            cant_heridos_en_sitio_accidente = sum(cant_heridos_en_sitio_accidente, na.rm = T),
+            cant_muertos_en_sitio_accidente = sum(cant_muertos_en_sitio_accidente, na.rm = T)) %>% 
+  ungroup()
+
+
+gt_data <- data_agrupada |> 
+  gt() |>
+  cols_label(
+    a_o_accidente = "",
+    cantidad_accidentes = "Accidentes",
+    cant_heridos_en_sitio_accidente = "Heridos",
+    cant_muertos_en_sitio_accidente = "Muertes")|>
+  tab_header(
+    title = md("**Cantidas accidentes por año y tipo**")
+  )
+
+
+
+ 
+
+```
+
+<center>
+<h1 id="id_sub1" class="room">
+
+Accidentes en la ciudad de Barranquilla </h1>
+
+<p id="id_sub" class="room">
+Corresponde a los años superiores a 2020.
+</p>
+
+</center>
+
+
+:::::::::::::: {.columns}
+
+
+
+::: {.column width="45%" }
+
+
+```{r , echo=FALSE, message=FALSE }
+
+div(tags$br())
+
+
+value_box(
+  title = "No. Accidentes",
+  value = as.numeric(accidentes_totales),
+  showcase = bs_icon("ev-front-fill"))
+
+# div(tags$br())
+
+value_box(
+  title = "No. Fallecidos",
+  value = as.numeric(accidentes_muertos),
+  showcase = bs_icon("file-person"))
+
+# div(tags$br())
+
+
+
+```
+
+
+```{r , echo=FALSE, message=FALSE}
+
+gt_data
+
+
+```
+
+
+:::
+
+
+::: {.column width="1%"}
+
+:::
+
+
+::: {.column width="54%"}
+```{r ,  echo=FALSE, message=FALSE}
+
+
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+
+
+```
+
+:::
+
+
+::::::::::::::
